@@ -6,6 +6,9 @@ on:
       environment:
         required: true
         type: string
+      bicepTemplateFile:
+        required: true
+        type: string
     secrets:
       AZURE_CLIENT_ID:
         required: true
