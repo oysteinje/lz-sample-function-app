@@ -1,0 +1,41 @@
+name: deploy-reporting
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'infra-as-code/reporting/**'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  Location: westeurope
+
+jobs:
+
+ deploy-test:
+  # Deploy to the dev environment.
+  deploy-dev:
+    uses: ./.github/workflows/azure-deploy-reusable.yml
+    with:
+      environment: d
+      bicepTemplateFile: infra-as-code/reporting/main.bicep
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_TEST }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+  deploy-prod:
+    uses: ./.github/workflows/azure-deploy-reusable.yml
+    needs: deploy-dev
+    with:
+      environment: p
+      bicepTemplateFile: infra-as-code/reporting/main.bicep
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_TEST }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
