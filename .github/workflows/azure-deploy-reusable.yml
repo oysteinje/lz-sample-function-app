@@ -46,4 +46,4 @@ jobs:
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-AzureWorkload.ps1 -TemplateFile ${{ inputs.bicepTemplateFile }} -TemplateParameterFile ${{ inputs.bicepParameterFile }} -Verbose
-          azPSVersion: "latest"
+          azPSVersion: "11.0.0"
