@@ -12,15 +12,13 @@ permissions:
   id-token: write
   contents: read
 
-env:
-  Location: westeurope
-
 jobs:
 
   deploy-dev:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     with:
       environment: d
+      env_file: ".d.env"
       bicepTemplateFile: infra-as-code/reporting/main.bicep
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -32,6 +30,7 @@ jobs:
     needs: deploy-dev
     with:
       environment: p
+      env_file: ".p.env"
       bicepTemplateFile: infra-as-code/reporting/main.bicep
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
