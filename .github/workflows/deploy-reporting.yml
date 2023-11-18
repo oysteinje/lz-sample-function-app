@@ -17,8 +17,6 @@ env:
 
 jobs:
 
- deploy-test:
-  # Deploy to the dev environment.
   deploy-dev:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     with:
