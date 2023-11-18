@@ -14,17 +14,17 @@ permissions:
 
 jobs:
 
-  deploy-dev:
+  reporting-dev:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     with:
-      environment: d
       env_file: ".d.env"
       bicepTemplateFile: infra-as-code/reporting/main.bicep
+      bicepTemplateFile: infra-as-code/reporting/main.d.bicepparam
 
-  deploy-prod:
+  reporting-prod:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     needs: deploy-dev
     with:
-      environment: p
       env_file: ".p.env"
       bicepTemplateFile: infra-as-code/reporting/main.bicep
+      bicepTemplateFile: infra-as-code/reporting/main.p.bicepparam

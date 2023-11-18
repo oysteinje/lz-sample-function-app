@@ -3,13 +3,13 @@ name: azure-deploy
 on:
   workflow_call:
     inputs:
-      environment:
-        required: true
-        type: string
       env_file:
         required: true
         type: string
       bicepTemplateFile:
+        required: true
+        type: string
+      bicepParameterFile:
         required: true
         type: string
 
@@ -45,5 +45,5 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-AzureWorkload.ps1 -TemplateFile ${{ inputs.bicepTemplateFile }} -TemplateParameterFile main.${{ inputs.environment }}.bicepparam -Verbose
+            .\pipeline-scripts\Deploy-AzureWorkload.ps1 -TemplateFile ${{ inputs.bicepTemplateFile }} -TemplateParameterFile ${{ inputs.bicepParameterFile }} -Verbose
           azPSVersion: "latest"
