@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'infra-as-code/reporting/**'
+    #paths:
+    #  - 'infra-as-code/reporting/**'
   workflow_dispatch:
 
 permissions:
@@ -20,10 +20,6 @@ jobs:
       environment: d
       env_file: ".d.env"
       bicepTemplateFile: infra-as-code/reporting/main.bicep
-    secrets:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
   deploy-prod:
     uses: ./.github/workflows/azure-deploy-reusable.yml
@@ -32,7 +28,3 @@ jobs:
       environment: p
       env_file: ".p.env"
       bicepTemplateFile: infra-as-code/reporting/main.bicep
-    secrets:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
