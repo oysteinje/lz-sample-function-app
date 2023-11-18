@@ -1,3 +1,5 @@
+name: azure-deploy
+
 on:
   workflow_call:
     inputs:
