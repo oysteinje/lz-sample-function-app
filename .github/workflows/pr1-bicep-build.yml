@@ -1,7 +1,17 @@
-name: bicep-build
+name: pr-1-bicep-build
 
 on:
-  workflow_call:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/bicepconfig.json"
+      - "**.bicep"
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   Bicep_Build:
@@ -37,7 +47,7 @@ jobs:
         shell: pwsh
         run: |
           $output = @()
-          Get-ChildItem -Recurse -Include '*.bicep', '*.bicepparam' | ForEach-Object {
+          Get-ChildItem -Recurse -Filter '*.bicep' | ForEach-Object {
               Write-Information "==> Attempting Bicep Build For File: $_" -InformationAction Continue
               $bicepOutput = bicep build $_.FullName 2>&1
               if ($LastExitCode -ne 0)

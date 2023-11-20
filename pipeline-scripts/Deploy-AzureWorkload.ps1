@@ -17,5 +17,5 @@ $inputObject = @{
   TemplateParameterFile = $TemplateParameterFile
   Verbose               = $true
 }
-
+write-host "foo"
 New-AzSubscriptionDeployment @inputObject
