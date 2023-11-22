@@ -8,6 +8,10 @@ on:
       - 'infra-as-code/inspection-checklist-reports/**'
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
 
   inspection-checklist-reports-d:
