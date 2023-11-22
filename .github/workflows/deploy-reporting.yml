@@ -17,12 +17,15 @@ jobs:
 
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
-    secrets: inherit
     with:
       env: d
       env_file: ".d.env"
       bicepTemplateFile: infra-as-code/inspection-checklist-reports/main.bicep
       bicepParameterFile: infra-as-code/inspection-checklist-reports/main.d.bicepparam
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 #
 #  inspection-checklist-reports-p:
 #    uses: ./.github/workflows/azure-deploy-reusable.yml
