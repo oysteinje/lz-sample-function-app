@@ -22,6 +22,7 @@ jobs:
       env_file: ".d.env"
       bicepTemplateFile: infra-as-code/inspection-checklist-reports/main.bicep
       bicepParameterFile: infra-as-code/inspection-checklist-reports/main.d.bicepparam
+      secrets: inherit
 #
 #  inspection-checklist-reports-p:
 #    uses: ./.github/workflows/azure-deploy-reusable.yml
