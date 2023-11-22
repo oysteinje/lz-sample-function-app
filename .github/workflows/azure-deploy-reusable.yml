@@ -3,7 +3,7 @@ name: azure-deploy
 on:
   workflow_call:
     inputs:
-      environment:
+      env:
         required: true
         type: string
       env_file:
@@ -19,7 +19,7 @@ on:
 jobs:
   azure-deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.env }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3

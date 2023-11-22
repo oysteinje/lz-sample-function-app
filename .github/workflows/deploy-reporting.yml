@@ -17,7 +17,7 @@ jobs:
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     with:
-      environment: d
+      env: d
       env_file: ".d.env"
       bicepTemplateFile: infra-as-code/inspection-checklist-reports/main.bicep
       bicepParameterFile: infra-as-code/inspection-checklist-reports/main.d.bicepparam
@@ -26,7 +26,7 @@ jobs:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     needs: inspection-checklist-reports-d
     with:
-      environment: p
+      env: p
       env_file: ".p.env"
       bicepTemplateFile: infra-as-code/inspection-checklist-reports/main.bicep
       bicepParameterFile: infra-as-code/inspection-checklist-reports/main.p.bicepparam
