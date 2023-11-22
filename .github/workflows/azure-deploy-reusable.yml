@@ -25,16 +25,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: "Remove Quotation Marks from Environment File"
-        uses: azure/powershell@v1
-        with:
-          inlineScript: |
-            Write-Host ${{ inputs.env_file }}
-            (Get-Content -Path ${{ inputs.env_file }} -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath ${{ inputs.env_file }} -Encoding UTF8
-          azPSVersion: "latest"
+      #- name: "Remove Quotation Marks from Environment File"
+      #  uses: azure/powershell@v1
+      #  with:
+      #    inlineScript: |
+      #      Write-Host ${{ inputs.env_file }}
+      #      (Get-Content -Path ${{ inputs.env_file }} -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath ${{ inputs.env_file }} -Encoding UTF8
+      #    azPSVersion: "latest"
 
-      - name: Import Environment Variables from File
-        run: cat ${{ inputs.env_file }} >> $GITHUB_ENV
+      #- name: Import Environment Variables from File
+      #  run: cat ${{ inputs.env_file }} >> $GITHUB_ENV
 
       - name: OIDC Login to Tenant
         uses: azure/login@v1
