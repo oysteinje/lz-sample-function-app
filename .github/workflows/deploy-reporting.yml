@@ -14,33 +14,14 @@ permissions:
 
 
 jobs:
-  azure-deploy:
-    runs-on: ubuntu-latest
-    environment: d
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - name: OIDC Login to Tenant
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true
-
-
-#jobs:
-#
-#  inspection-checklist-reports-d:
-#    uses: ./.github/workflows/azure-deploy-reusable.yml
-#    with:
-#      env: d
-#      env_file: ".d.env"
-#      bicepTemplateFile: infra-as-code/inspection-checklist-reports/main.bicep
-#      bicepParameterFile: infra-as-code/inspection-checklist-reports/main.d.bicepparam
+  inspection-checklist-reports-d:
+    uses: ./.github/workflows/azure-deploy-reusable.yml
+    with:
+      env: d
+      env_file: ".d.env"
+      bicepTemplateFile: infra-as-code/inspection-checklist-reports/main.bicep
+      bicepParameterFile: infra-as-code/inspection-checklist-reports/main.d.bicepparam
 #
 #  inspection-checklist-reports-p:
 #    uses: ./.github/workflows/azure-deploy-reusable.yml
