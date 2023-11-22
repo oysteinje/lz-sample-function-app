@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'infra-as-code/inspection-checklist-reports/**'
+    #paths:
+    #  - 'infra-as-code/inspection-checklist-reports/**'
   workflow_dispatch:
 
 permissions:
