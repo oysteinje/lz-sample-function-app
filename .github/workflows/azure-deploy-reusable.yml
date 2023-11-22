@@ -16,6 +16,10 @@ on:
         required: true
         type: string
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   azure-deploy:
     runs-on: ubuntu-latest
