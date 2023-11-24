@@ -39,5 +39,4 @@ param (
 #    Authorization = "Bearer $(Get-AzResourceManagerAccessToken)"
 #}
 
-Get-AzResourceGroup
-#$roleDefinitionId = (Get-AzRoleDefinition -Name "Owner").Id
+$roleDefinitionId = (Get-AzRoleDefinition -Scope "/subscriptions/a83145a3-215b-44a4-9387-a540faaa58e9" -Name "Owner").Id
