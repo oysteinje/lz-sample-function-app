@@ -57,11 +57,11 @@ jobs:
           inlineScript: |
             Start-Sleep -Seconds 600
             Get-AzResourceGroup
-          azPSVersion: "11.0.0"
+          azPSVersion: "latest"
 
       - name: "Azure Workload Deployment"
         uses: azure/powershell@v1
         with:
           inlineScript: |
             Get-AzResourceGroup
-          azPSVersion: "11.0.0"
+          azPSVersion: "latest"
