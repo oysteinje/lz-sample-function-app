@@ -1,12 +1,15 @@
 param (
-  [Parameter()]
-  [String]$Location = "$($env:LOCATION)",
+#  [Parameter()]
+#  [String]$Location = "$($env:LOCATION)",
+#
+#  [Parameter()]
+#  [String]$TemplateFile,
+#
+#  [Parameter()]
+#  [String]$TemplateParameterFile
 
   [Parameter()]
-  [String]$TemplateFile,
-
-  [Parameter()]
-  [String]$TemplateParameterFile
+  [String]$Foo = "bar"
 )
 
 ## Parameters necessary for deployment
