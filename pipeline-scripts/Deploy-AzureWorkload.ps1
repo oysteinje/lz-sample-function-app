@@ -39,4 +39,17 @@ param (
 #    Authorization = "Bearer $(Get-AzResourceManagerAccessToken)"
 #}
 
+Write-Verbose "get rg"
+Get-AzResourceGroup
+
+Write-Verbose "get az key vault"
+Get-AzKeyVault
+
+Write-Verbose "get az front door"
+Get-AzFrontDoor
+
+Write-Verbose "Get role defs from code"
+$listAllAzRoleDefinitions = Get-AzRoleDefinition -Scope "/subscriptions/a83145a3-215b-44a4-9387-a540faaa58e9"
+
+Write-Verbose "Get role defs"
 $roleDefinitionId = (Get-AzRoleDefinition -Scope "/subscriptions/a83145a3-215b-44a4-9387-a540faaa58e9").Id
