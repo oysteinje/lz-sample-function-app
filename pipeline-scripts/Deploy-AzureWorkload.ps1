@@ -24,19 +24,20 @@ param (
 #New-AzSubscriptionDeployment @inputObject
 
 # Function to get access token
-function Get-AzResourceManagerAccessToken {
-    $context = Get-AzContext
-    $resourceProfile = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile
-    $client = New-Object Microsoft.Azure.Commands.ResourceManager.Common.RMProfileClient($resourceProfile)
+#function Get-AzResourceManagerAccessToken {
+#    $context = Get-AzContext
+#    $resourceProfile = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile
+#    $client = New-Object Microsoft.Azure.Commands.ResourceManager.Common.RMProfileClient($resourceProfile)
+#
+#    $token = $($client.AcquireAccessToken(($context).Tenant.TenantId).AccessToken)
+#
+#    return $token
+#}
+#
+## Use powershell to get an accestoken based on the currently signed in account/service principal
+#$headers = @{
+#    Authorization = "Bearer $(Get-AzResourceManagerAccessToken)"
+#}
 
-    $token = $($client.AcquireAccessToken(($context).Tenant.TenantId).AccessToken)
-
-    return $token
-}
-
-# Use powershell to get an accestoken based on the currently signed in account/service principal
-$headers = @{
-    Authorization = "Bearer $(Get-AzResourceManagerAccessToken)"
-}
-
-$roleDefinitionId = (Get-AzRoleDefinition -Name "Owner").Id
+Get-AzResourceGroup
+#$roleDefinitionId = (Get-AzRoleDefinition -Name "Owner").Id
