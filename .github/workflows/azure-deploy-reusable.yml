@@ -56,11 +56,12 @@ jobs:
         with:
           inlineScript: |
             Start-Sleep -Seconds 600
+            Get-AzResourceGroup
           azPSVersion: "11.0.0"
 
       - name: "Azure Workload Deployment"
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-AzureWorkload.ps1 #-TemplateFile ${{ inputs.bicepTemplateFile }} -TemplateParameterFile ${{ inputs.bicepParameterFile }} -Verbose
+            Get-AzResourceGroup
           azPSVersion: "11.0.0"
