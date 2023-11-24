@@ -39,4 +39,4 @@ $headers = @{
     Authorization = "Bearer $(Get-AzResourceManagerAccessToken)"
 }
 
-$roleDefinitionId = (Get-AzRoleDefinition -Name $RoleName).Id
+$roleDefinitionId = (Get-AzRoleDefinition -Name "Owner").Id
