@@ -55,8 +55,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            Write-Host "foobar"
-            Get-AzResourceGroup
+            Start-Sleep -Duration (New-TimeSpan -Minutes 10)
           azPSVersion: "11.0.0"
 
       - name: "Azure Workload Deployment"
