@@ -63,5 +63,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
+            ls -r
+            ls lz-sample-function-app
             .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH $env:ARTIFACT_NAME -Verbose
           azPSVersion: "11.0.0"
