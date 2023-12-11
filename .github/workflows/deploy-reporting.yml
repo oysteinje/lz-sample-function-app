@@ -46,7 +46,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ env.ARTIFACT_NAME }}
-        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output.zip
+        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/${{ env.BUILD_PACKAGE_NAME}}
 
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
@@ -54,8 +54,8 @@ jobs:
     with:
       env: d
       env_file: ".d.env"
-      artifact_name: ${{ env.ARTIFACT_NAME }}
-      build_package_name: ${{ env.BUILD_PACKAGE_NAME }}
+      artifact_name: icr
+      build_package_name: output.zip
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
