@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - build-and-pub
     #paths:
     #  - 'infra-as-code/inspection-checklist-reports/**'
   workflow_dispatch:
@@ -12,8 +13,39 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  ARTIFACT_NAME: icr
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'function-app'
+  DOTNET_VERSION: '6.0.x'
 
 jobs:
+
+  build-inspection-checklist-reports:
+    runs-on: windows-latest
+    environment: dev
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v3
+
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: 'DotNet Build, Test and Zip Project'
+      shell: pwsh
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        dotnet build --configuration Release --output ./output
+        dotnet test
+        Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
+        popd
+
+    - name: 'Upload Build Artifact'
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output.zip
 
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
