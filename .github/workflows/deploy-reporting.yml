@@ -53,8 +53,6 @@ jobs:
     with:
       env: d
       env_file: ".d.env"
-      bicep_template_file: infra-as-code/inspection-checklist-reports/main.bicep
-      bicep_parameter_file: infra-as-code/inspection-checklist-reports/main.d.bicepparam
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
