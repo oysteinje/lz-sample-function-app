@@ -13,16 +13,15 @@ permissions:
   id-token: write
   contents: read
 
-env:
-  ARTIFACT_NAME: icr
-  BUILD_PACKAGE_NAME: output.zip
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'function-app'
-  DOTNET_VERSION: '6.0.x'
 
 jobs:
 
   build-inspection-checklist-reports:
     runs-on: ubuntu-latest
+    env:
+      ARTIFACT_NAME: icr
+      AZURE_FUNCTIONAPP_PACKAGE_PATH: 'function-app'
+      DOTNET_VERSION: '6.0.x'
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v3
@@ -54,8 +53,6 @@ jobs:
     with:
       env: d
       env_file: ".d.env"
-      artifact_name: icr
-      build_package_name: output.zip
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}

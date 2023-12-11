@@ -10,10 +10,8 @@ on:
         required: true
         type: string
       artifact_name:
-        required: true
-        type: string
-      build_package_name:
-        required: true
+        default: artifact
+        required: false
         type: string
     secrets:
       AZURE_CLIENT_ID:
@@ -69,5 +67,5 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH ${{ inputs.artifact_name}}/${{ inputs.build_package_name }} -Verbose
+            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH ${{ inputs.artifact_name}}/output.zip -Verbose
           azPSVersion: "11.0.0"
