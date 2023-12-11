@@ -1,6 +1,6 @@
 param(
     [Parameter()]
-    [String]$ARCHIVE_PATH
+    [String]$ARCHIVE_PATH,
     [Parameter()]
     [String]$AZURE_FUNCTIONAPP_NAME = "$($env:AZURE_FUNCTIONAPP_NAME)",
     [Parameter()]
