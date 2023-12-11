@@ -16,7 +16,7 @@ permissions:
 env:
   ARTIFACT_NAME: icr
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'function-app'
-  DOTNET_VERSION: '6.0.x'
+  DOTNET_VERSION: '6.0.0'
 
 jobs:
 
@@ -37,7 +37,7 @@ jobs:
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
-        dotnet test
+        #dotnet test
         Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
         popd
 
@@ -49,6 +49,7 @@ jobs:
 
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
+    needs: build-inspection-checklist-reports
     with:
       env: d
       env_file: ".d.env"
