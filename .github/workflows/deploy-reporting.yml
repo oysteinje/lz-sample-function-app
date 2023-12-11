@@ -32,13 +32,14 @@ jobs:
 
     - name: 'DotNet Build, Test and Zip Project'
       shell: pwsh
+      working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
       run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        #pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet restore
         dotnet build --configuration Release --output ./output
         dotnet test
         Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
-        popd
+        #popd
 
     - name: 'Upload Build Artifact'
       uses: actions/upload-artifact@v3
