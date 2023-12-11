@@ -1,4 +1,4 @@
-name: deploy-inspection-checklist-reports
+name: build-and-deploy-inspection-checklist-reports
 
 on:
   push:
@@ -16,12 +16,12 @@ permissions:
 env:
   ARTIFACT_NAME: icr
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'function-app'
-  DOTNET_VERSION: '6.0.0'
+  DOTNET_VERSION: '6.0.x'
 
 jobs:
 
   build-inspection-checklist-reports:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: dev
     steps:
     - name: 'Checkout GitHub Action'
