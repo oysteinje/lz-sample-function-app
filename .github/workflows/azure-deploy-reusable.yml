@@ -61,6 +61,8 @@ jobs:
       - name: "Azure Workload Deployment"
         uses: azure/powershell@v1
         with:
+          env:
+            ARTIFACT_NAME: ${{ env.ARTIFACT_NAME }}
           inlineScript: |
-            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH "${{ env.ARTIFACT_NAME}}" -Verbose
-          azPSVersion: "11.0.0" # required to deploy bicepparam. Change to latest when ubuntu-latest ships by default with azure pwsh >=11
+            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH $env:ARTIFACT_NAME -Verbose
+          azPSVersion: "11.0.0"
