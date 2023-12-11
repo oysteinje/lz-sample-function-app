@@ -50,7 +50,6 @@ jobs:
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
     needs: build-inspection-checklist-reports
-    secrets: inherit
     with:
       environment: d
       env_file: ".d.env"
