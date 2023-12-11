@@ -38,14 +38,14 @@ jobs:
         dotnet restore
         dotnet build --configuration Release --output ./output
         #dotnet test
-        Compress-Archive -Path output -DestinationPath ${{ env.BUILD_PACKAGE_NAME }} -Force -Verbose
+        Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
         popd
 
     - name: 'Upload Build Artifact'
       uses: actions/upload-artifact@v3
       with:
         name: ${{ env.ARTIFACT_NAME }}
-        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/${{ env.BUILD_PACKAGE_NAME}}
+        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output.zip
 
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
