@@ -1,18 +1,27 @@
+name: azure-deploy
+
 on:
   workflow_call:
     inputs:
-      environment:
+      env:
         required: true
         type: string
       env_file:
         required: true
         type: string
-      bicep_template_file:
+      bicepTemplateFile:
         required: true
         type: string
-      bicep_parameter_file:
+      bicepParameterFile:
         required: true
         type: string
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_TENANT_ID:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
 jobs:
   azure-deploy:
     runs-on: ubuntu-latest
