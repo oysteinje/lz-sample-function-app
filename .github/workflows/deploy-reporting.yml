@@ -34,11 +34,7 @@ jobs:
       shell: pwsh
       working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
       run: |
-        #pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
-        dotnet test
-        Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
-        #popd
 
     - name: 'DotNet Test'
       shell: pwsh
@@ -50,7 +46,7 @@ jobs:
       shell: pwsh
       working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
       run: |
-        dotnet test
+        Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
 
     - name: 'Upload Build Artifact'
       uses: actions/upload-artifact@v3
