@@ -1,5 +1,5 @@
 using 'main.bicep'
 
 param env = 'd'
-param serviceName = 'icr'
-param subscriptionPurposeName = 'd365services'
+param serviceName = readEnvironmentVariable('SERVICE_NAME')
+param subscriptionPurposeName = readEnvironmentVariable('SUBSCRIPTION_PURPOSE_NAME')
