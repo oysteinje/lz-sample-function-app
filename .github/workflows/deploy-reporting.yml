@@ -38,7 +38,7 @@ jobs:
         dotnet restore
         dotnet build --configuration Release --output ./output
         #dotnet test
-        Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
+        #Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
         popd
 
     - name: 'Upload Build Artifact'
