@@ -32,16 +32,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      #- name: "Remove Quotation Marks from Environment File"
-      #  uses: azure/powershell@v1
-      #  with:
-      #    inlineScript: |
-      #      Write-Host ${{ inputs.env_file }}
-      #      (Get-Content -Path ${{ inputs.env_file }} -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath ${{ inputs.env_file }} -Encoding UTF8
-      #    azPSVersion: "latest"
+      - name: "Remove Quotation Marks from Environment File"
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            Write-Host ${{ inputs.env_file }}
+            (Get-Content -Path ${{ inputs.env_file }} -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath ${{ inputs.env_file }} -Encoding UTF8
+          azPSVersion: "latest"
 
-      #- name: Import Environment Variables from File
-      #  run: cat ${{ inputs.env_file }} >> $GITHUB_ENV
+      - name: Import Environment Variables from File
+        run: cat ${{ inputs.env_file }} >> $GITHUB_ENV
 
       - name: OIDC Login to Tenant
         uses: azure/login@v1
@@ -55,12 +55,18 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            Start-Sleep -Seconds 600
-          azPSVersion: "11.0.0"
+            .\pipeline-scripts\Deploy-AzureWorkload.ps1 -TemplateFile ${{ inputs.bicep_template_file }} -TemplateParameterFile ${{ inputs.bicep_parameter_file }} -Verbose
+          azPSVersion: "11.0.0" # required to deploy bicepparam. Change to latest when ubuntu-latest ships by default with azure pwsh >=11
 
+      - name: Download a build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+
+      # Publish function app
       - name: "Azure Workload Deployment"
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-AzureWorkload.ps1 -Verbose #-TemplateFile ${{ inputs.bicepTemplateFile }} -TemplateParameterFile ${{ inputs.bicepParameterFile }} -Verbose
-          azPSVersion: "latest"
+            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH '${{ env.ARTIFACT_NAME}} -Verbose
+          azPSVersion: "11.0.0" # required to deploy bicepparam. Change to latest when ubuntu-latest ships by default with azure pwsh >=11
