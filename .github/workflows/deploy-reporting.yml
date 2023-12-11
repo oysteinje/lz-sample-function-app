@@ -45,7 +45,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ env.ARTIFACT_NAME }}
-        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output.zip
+        path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
 
   inspection-checklist-reports-d:
     uses: ./.github/workflows/azure-deploy-reusable.yml
