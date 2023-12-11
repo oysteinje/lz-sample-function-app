@@ -63,7 +63,5 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            ls -r
-            ls icr
             .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH icr/output.zip -Verbose
           azPSVersion: "11.0.0"
