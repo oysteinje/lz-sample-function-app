@@ -30,16 +30,27 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 'DotNet Build, Test and Zip Project'
+    - name: 'DotNet Build'
       shell: pwsh
       working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
       run: |
         #pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-        dotnet restore
         dotnet build --configuration Release --output ./output
         dotnet test
         Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
         #popd
+
+    - name: 'DotNet Test'
+      shell: pwsh
+      working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+      run: |
+        dotnet test
+
+    - name: 'Zip project'
+      shell: pwsh
+      working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+      run: |
+        dotnet test
 
     - name: 'Upload Build Artifact'
       uses: actions/upload-artifact@v3
