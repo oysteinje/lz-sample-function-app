@@ -9,10 +9,10 @@ on:
       env_file:
         required: true
         type: string
-      bicepTemplateFile:
+      bicep_template_file:
         required: true
         type: string
-      bicepParameterFile:
+      bicep_parameter_file:
         required: true
         type: string
     secrets:
