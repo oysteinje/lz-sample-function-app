@@ -36,7 +36,7 @@ jobs:
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet restore
         dotnet build --configuration Release --output ./output
-        #dotnet test
+        dotnet test
         Compress-Archive -Path output -DestinationPath output.zip -Force -Verbose
         popd
 
