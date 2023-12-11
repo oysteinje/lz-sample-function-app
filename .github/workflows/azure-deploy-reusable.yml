@@ -9,6 +9,9 @@ on:
       env_file:
         required: true
         type: string
+      artifact_name:
+        required: true
+        type: string
     secrets:
       AZURE_CLIENT_ID:
         required: true
@@ -55,13 +58,13 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACT_NAME }}
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.artifact_name }}
 
       # Publish function app
       - name: "Publish function app"
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH icr/output.zip -Verbose
+            .\pipeline-scripts\Publish-IcrProject.ps1 -ARCHIVE_PATH ${{ inputs.artifact_name}}/${{ inputs.build_package_name }} -Verbose
           azPSVersion: "11.0.0"
